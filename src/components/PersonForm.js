@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { gql, useMutation } from '@apollo/client'
 import { CREATE_PERSON, ALL_PERSONS, EDIT_NUMBER } from '../helpers/queries'
+import PhoneForm from './PhoneForm'
 
 
 const PersonForm = ({setError}) => {
@@ -25,7 +26,12 @@ const PersonForm = ({setError}) => {
   const submit = (event) => {
     event.preventDefault()
 
-    createPerson({  variables: { name, phone, street, city } })
+    createPerson({  
+      variables: { 
+        name, street, city,
+        phone: phone.length > 0 ? phone : undefined 
+      } 
+    })
 
     setName('')
     setPhone('')
